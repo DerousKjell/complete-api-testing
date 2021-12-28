@@ -5,9 +5,21 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API", "Customers.API\Customers.API.csproj", "{33D61576-3540-475C-990D-E6C722150FA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.API.UnitTests", "Customers.API.UnitTests\Customers.API.UnitTests.csproj", "{73FB52B0-AAC4-4B1A-B1E8-10763ACDE63A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API.UnitTests", "Customers.API.UnitTests\Customers.API.UnitTests.csproj", "{73FB52B0-AAC4-4B1A-B1E8-10763ACDE63A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.API.IntegrationTests", "Customers.API.IntegrationTests\Customers.API.IntegrationTests.csproj", "{67B4C30C-F7A9-41EB-AE19-8324841757B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API.IntegrationTests", "Customers.API.IntegrationTests\Customers.API.IntegrationTests.csproj", "{67B4C30C-F7A9-41EB-AE19-8324841757B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. API", "0. API", "{1165DF64-0889-4A15-A86A-A87DDE91DF36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Unit tests", "1. Unit tests", "{722A7728-36F5-493A-98EA-2BD80BD750C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Integration tests", "2. Integration tests", "{2F1537B0-D81B-43D1-A9C4-FF2848CE5382}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Contract tests", "3. Contract tests", "{5796B364-A438-446B-B106-2A1D1C8F8E66}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API.ContractTests.Consumer", "Customers.API.ContractTests.Consumer\Customers.API.ContractTests.Consumer.csproj", "{EC706B86-EBF4-4B63-88A8-CE9FE7660308}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.API.ContractTests.Provider", "Customers.API.ContractTests.Provider\Customers.API.ContractTests.Provider.csproj", "{4798088F-AB11-410D-9529-ABE15B3B9B8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +39,24 @@ Global
 		{67B4C30C-F7A9-41EB-AE19-8324841757B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67B4C30C-F7A9-41EB-AE19-8324841757B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67B4C30C-F7A9-41EB-AE19-8324841757B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC706B86-EBF4-4B63-88A8-CE9FE7660308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC706B86-EBF4-4B63-88A8-CE9FE7660308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC706B86-EBF4-4B63-88A8-CE9FE7660308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC706B86-EBF4-4B63-88A8-CE9FE7660308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33D61576-3540-475C-990D-E6C722150FA1} = {1165DF64-0889-4A15-A86A-A87DDE91DF36}
+		{73FB52B0-AAC4-4B1A-B1E8-10763ACDE63A} = {722A7728-36F5-493A-98EA-2BD80BD750C9}
+		{67B4C30C-F7A9-41EB-AE19-8324841757B4} = {2F1537B0-D81B-43D1-A9C4-FF2848CE5382}
+		{EC706B86-EBF4-4B63-88A8-CE9FE7660308} = {5796B364-A438-446B-B106-2A1D1C8F8E66}
+		{4798088F-AB11-410D-9529-ABE15B3B9B8A} = {5796B364-A438-446B-B106-2A1D1C8F8E66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D33D1910-D5FE-4417-8109-88581BCE81B5}
