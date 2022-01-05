@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API", "Customers.API\Customers.API.csproj", "{33D61576-3540-475C-990D-E6C722150FA1}"
 EndProject
@@ -19,7 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Contract tests", "3. Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API.ContractTests.Consumer", "Customers.API.ContractTests.Consumer\Customers.API.ContractTests.Consumer.csproj", "{EC706B86-EBF4-4B63-88A8-CE9FE7660308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.API.ContractTests.Provider", "Customers.API.ContractTests.Provider\Customers.API.ContractTests.Provider.csproj", "{4798088F-AB11-410D-9529-ABE15B3B9B8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API.ContractTests.Provider", "Customers.API.ContractTests.Provider\Customers.API.ContractTests.Provider.csproj", "{4798088F-AB11-410D-9529-ABE15B3B9B8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. End to end tests", "4. End to end tests", "{366BD7EB-7518-4B22-94CE-9B0DB9CC6ECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.API.E2ETests", "Customers.API.E2ETests\Customers.API.E2ETests.csproj", "{450F24CE-6A06-4541-9183-271B24AE571F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4798088F-AB11-410D-9529-ABE15B3B9B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450F24CE-6A06-4541-9183-271B24AE571F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450F24CE-6A06-4541-9183-271B24AE571F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450F24CE-6A06-4541-9183-271B24AE571F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450F24CE-6A06-4541-9183-271B24AE571F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{67B4C30C-F7A9-41EB-AE19-8324841757B4} = {2F1537B0-D81B-43D1-A9C4-FF2848CE5382}
 		{EC706B86-EBF4-4B63-88A8-CE9FE7660308} = {5796B364-A438-446B-B106-2A1D1C8F8E66}
 		{4798088F-AB11-410D-9529-ABE15B3B9B8A} = {5796B364-A438-446B-B106-2A1D1C8F8E66}
+		{450F24CE-6A06-4541-9183-271B24AE571F} = {366BD7EB-7518-4B22-94CE-9B0DB9CC6ECC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D33D1910-D5FE-4417-8109-88581BCE81B5}
