@@ -9,5 +9,11 @@ namespace Customers.API.Repositories
         Task<Customer> GetCustomerAsync(int customerId);
 
         Task<IEnumerable<Customer>> GetCustomersAsync();
+
+        Task<Customer> CreateCustomer(CreateCustomerRequest request);
+
+        Task<Customer> UpdateCustomer(int customerId, UpdateCustomerRequest request);
+
+        Task DeleteCustomer(int customerId);
     }
 }

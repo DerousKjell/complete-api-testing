@@ -234,3 +234,6 @@ _Pvt_Extensions
 .fake/
 /NDependOut
 /CleanArchitecture.ndproj
+
+# SQLITE DBs
+*.db

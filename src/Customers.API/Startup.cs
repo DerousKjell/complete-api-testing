@@ -1,3 +1,4 @@
+using Customers.API.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Customers.API.Repositories;
+using Customers.API.SeedWork.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 namespace Customers.API
 {
@@ -25,8 +28,12 @@ namespace Customers.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Customers.API", Version = "v1" });
             });
-
+            
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlite("Data Source=customers.db"));
+
+            services.AddScoped<IDbContext>(provider => provider.GetService<DatabaseContext>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +47,7 @@ namespace Customers.API
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
             app.UseRouting();
 
@@ -49,6 +57,15 @@ namespace Customers.API
             {
                 endpoints.MapControllers();
             });
+
+            MigrateDatabase(app);
+        }
+
+        private void MigrateDatabase(IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            context.Database.Migrate();
         }
     }
 }
