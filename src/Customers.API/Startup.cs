@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Customers.API.Repositories;
 using Customers.API.SeedWork.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Customers.API.Services;
 
 namespace Customers.API
 {
@@ -30,6 +31,7 @@ namespace Customers.API
             });
             
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IMailService, SmtpMailService>();
 
             services.AddDbContext<DatabaseContext>(options => options.UseSqlite("Data Source=customers.db"));
 

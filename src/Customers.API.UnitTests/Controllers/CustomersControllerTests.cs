@@ -7,6 +7,7 @@ using Customers.API.Repositories;
 using FakeItEasy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Customers.API.Services;
 
 namespace Customers.API.UnitTests.Controllers
 {
@@ -18,9 +19,10 @@ namespace Customers.API.UnitTests.Controllers
         {
             // Arrange
             var customerRepository = A.Fake<ICustomerRepository>();
+            var emailService = A.Fake<IMailService>();
             A.CallTo(() => customerRepository.GetCustomerAsync(A<int>._)).Returns(new Customer { Id = 1, Name = "Tesla" });
 
-            var sut = new CustomersController(customerRepository);
+            var sut = new CustomersController(customerRepository, emailService);
 
             // Act
             var response = await sut.Get(1);
@@ -40,9 +42,10 @@ namespace Customers.API.UnitTests.Controllers
         {
             // Arrange
             var customerRepository = A.Fake<ICustomerRepository>();
+            var emailService = A.Fake<IMailService>();
             A.CallTo(() => customerRepository.GetCustomerAsync(A<int>._)).Returns((Customer)null);
 
-            var sut = new CustomersController(customerRepository);
+            var sut = new CustomersController(customerRepository, emailService);
 
             // Act
             var response = await sut.Get(1);
@@ -60,10 +63,11 @@ namespace Customers.API.UnitTests.Controllers
         {
             // Arrange
             var customerRepository = A.Fake<ICustomerRepository>();
+            var emailService = A.Fake<IMailService>();
             A.CallTo(() => customerRepository.GetCustomersAsync()).Returns(new List<Customer>
                 { new Customer { Id = 1, Name = "Tesla" } });
 
-            var sut = new CustomersController(customerRepository);
+            var sut = new CustomersController(customerRepository, emailService);
 
             // Act
             var response = await sut.Get();

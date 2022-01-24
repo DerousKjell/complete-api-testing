@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Customers.API.IntegrationTests.Seedwork;
 using Customers.API.Models;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Xunit;
 
 namespace Customers.API.IntegrationTests.Controllers
 {
-    public class CustomersControllerTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class CustomersControllerTests : IClassFixture<CustomWebApplicationFactory>
     {
         readonly HttpClient _client;
 
-        public CustomersControllerTests(WebApplicationFactory<Startup> fixture)
+        public CustomersControllerTests(CustomWebApplicationFactory fixture)
         {
             _client = fixture.CreateClient();
         }
@@ -50,6 +51,21 @@ namespace Customers.API.IntegrationTests.Controllers
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var customers = JsonConvert.DeserializeObject<IEnumerable<Customer>>(await response.Content.ReadAsStringAsync());
+            Assert.NotNull(customers);
+        }
+
+        [Fact]
+        public async Task Create_Customer()
+        {
+            // Act
+            var request = new { Name = "MyTestCompany", Email = "info@mytestcompany.com" };
+            var json = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+            var response = await _client.PostAsync("/api/customers", json);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var customers = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
             Assert.NotNull(customers);
         }
     }

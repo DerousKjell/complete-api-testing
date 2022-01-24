@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using Customers.API.Models;
+﻿using Customers.API.Models;
 using Customers.API.Repositories;
+using Customers.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Customers.API.Controllers
 {
@@ -10,12 +11,14 @@ namespace Customers.API.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IMailService _mailService;
 
-        public CustomersController(ICustomerRepository customerRepository)
+        public CustomersController(ICustomerRepository customerRepository, IMailService mailService)
         {
             _customerRepository = customerRepository;
+            _mailService = mailService;
         }
-        
+
         [HttpGet("{customerId}")]
         public async Task<IActionResult> Get(int customerId)
         {
@@ -40,6 +43,12 @@ namespace Customers.API.Controllers
         public async Task<IActionResult> Post([FromBody] CreateCustomerRequest request)
         {
             var customer = await _customerRepository.CreateCustomer(request);
+
+            if (!string.IsNullOrWhiteSpace(request.Email))
+            {
+                await _mailService.SendMailAsync(customer.Email, "Thank you for your registration", "Hi there..");
+            }
+
             return Ok(customer);
         }
 

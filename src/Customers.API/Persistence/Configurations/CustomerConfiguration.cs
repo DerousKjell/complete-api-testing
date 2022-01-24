@@ -10,7 +10,7 @@ namespace Customers.API.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.Property(x => x.Name).IsRequired();
-            
+
             var customers = new List<Customer>
             {
                 new() { Id = 1, Name = "Tesla" },
