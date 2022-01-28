@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Customers.API.IntegrationTests.Seedwork;
+using Customers.API.IntegrationTests.Seedwork.Mocks;
 using Customers.API.Models;
+using Customers.API.Services;
+using FakeItEasy;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -58,6 +62,28 @@ namespace Customers.API.IntegrationTests.Controllers
         public async Task Create_Customer()
         {
             // Act
+            MockedMailService.SendMailAsyncFunc = A.Fake<Func<string, string, string, Task<SendMailResult>>>();
+            A.CallTo(() => MockedMailService.SendMailAsyncFunc(A<string>._, A<string>._, A<string>._)).Returns(Task.FromResult(new SendMailResult { IsSuccess = true }));
+
+            var request = new { Name = "MyTestCompany", Email = "info@mytestcompany.com" };
+            var json = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+            var response = await _client.PostAsync("/api/customers", json);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var customers = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            Assert.NotNull(customers);
+        }
+
+
+        [Fact]
+        public async Task CreateCustomer_EnsureAFailingMailServiceDoesntTroubleUs()
+        {
+            // Act
+            MockedMailService.SendMailAsyncFunc = A.Fake<Func<string, string, string, Task<SendMailResult>>>();
+            A.CallTo(() => MockedMailService.SendMailAsyncFunc(A<string>._, A<string>._, A<string>._)).Returns(Task.FromResult(new SendMailResult { IsSuccess = false }));
+
             var request = new { Name = "MyTestCompany", Email = "info@mytestcompany.com" };
             var json = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
